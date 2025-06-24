@@ -19,7 +19,7 @@ on:
         type: choice
         options:
           - 'oneplus_12'
-          - 'oneplus_ace3_pro'
+          - 'oneplus_ace3_pro_v'
           - 'oneplus_ace5'
           - 'oneplus_13r'
           - 'oneplus_pad2'
@@ -121,7 +121,7 @@ jobs:
       - name: 📥 Initialize repo and sync (克隆内核源码)
         run: |
          mkdir kernel_workspace && cd kernel_workspace
-         repo init -u https://github.com/Xiaomichael/kernel_manifest.git -b refs/heads/oneplus/${{ github.event.inputs.CPU }} -m ${{ github.event.inputs.FEIL }}.xml --depth=1
+         repo init -u https://github.com/Lychee997/kernel_manifest.git -b refs/heads/oneplus/${{ github.event.inputs.CPU }} -m ${{ github.event.inputs.FEIL }}.xml --depth=1
          repo sync -c -j$(nproc --all) --no-tags --no-clone-bundle --force-sync
          rm kernel_platform/common/android/abi_gki_protected_exports_* || echo "No protected exports!"
          rm kernel_platform/msm-kernel/android/abi_gki_protected_exports_* || echo "No protected exports!"
@@ -131,9 +131,9 @@ jobs:
          sed -i '$i res=$(echo "$res" | sed '\''s/-dirty//g'\'')' kernel_platform/common/scripts/setlocalversion
          sed -i '$i res=$(echo "$res" | sed '\''s/-dirty//g'\'')' kernel_platform/msm-kernel/scripts/setlocalversion
          sed -i '$i res=$(echo "$res" | sed '\''s/-dirty//g'\'')' kernel_platform/external/dtc/scripts/setlocalversion
-         sed -i '$s|echo "\$res"|echo "-oki-xiaoxiaow"|' kernel_platform/common/scripts/setlocalversion            
-         sed -i '$s|echo "\$res"|echo "-oki-xiaoxiaow"|' kernel_platform/msm-kernel/scripts/setlocalversion
-         sed -i '$s|echo "\$res"|echo "-oki-xiaoxiaow"|' kernel_platform/external/dtc/scripts/setlocalversion
+         sed -i '$s|echo "\$res"|echo "-oki-lychee7"|' kernel_platform/common/scripts/setlocalversion            
+         sed -i '$s|echo "\$res"|echo "-oki-lychee7"|' kernel_platform/msm-kernel/scripts/setlocalversion
+         sed -i '$s|echo "\$res"|echo "-oki-lychee7"|' kernel_platform/external/dtc/scripts/setlocalversion
           
       - name: ⚙️ Set up SukiSU Ultra (配置 SukiSU Ultra)
         run: |
